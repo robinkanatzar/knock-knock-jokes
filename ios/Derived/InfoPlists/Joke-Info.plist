@@ -40,6 +40,8 @@
 	<string>We need Photo Library Access for the App to work.</string>
 	<key>NSRemindersFullAccessUsageDescription</key>
 	<string>We need Reminders Access for the App to work.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>We need to access speech recognition to hear your jokes!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

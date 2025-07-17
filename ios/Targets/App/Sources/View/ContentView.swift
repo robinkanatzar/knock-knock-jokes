@@ -13,24 +13,7 @@ struct ContentView: View {
 	}
 
 	var body: some View {
-		TabView {
-
-			// Pre-made Settings View for easy native-looking settings screen.
-			Tab("Settings", systemImage: "gear") {
-				SettingsView()
-			}
-
-			#if DEBUG
-
-				TabSection("DEBUG ONLY") {
-					// Use this to create quick settings and toggles to streamline the development process
-					Tab("Developer", systemImage: "hammer") {
-						DeveloperSettingsView()
-					}
-				}
-
-			#endif
-		}
+		JokeView()
 	}
 }
 
