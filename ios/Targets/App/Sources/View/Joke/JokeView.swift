@@ -24,42 +24,49 @@ struct JokeView: View {
         
     var body: some View {
         VStack(spacing: 20) {
-            Text("Status: \(status.rawValue)")
+            Text("Status: \(status.rawValue.capitalized)")
+                .font(.headline)
                 .padding()
-            
-            Button("Start") {
+
+            Button(action: {
                 status = .speaking
                 speechHelper.speak("Knock knock") {
                     status = .idle
                 }
+            }) {
+                Label("Start Joke", systemImage: "megaphone")
             }
-            Button("Start listening") {
-                status = .listening
-                startListening()
+            .buttonStyle(.borderedProminent)
+
+            HStack(spacing: 16) {
+                Button(action: {
+                    status = .listening
+                    startListening()
+                }) {
+                    Label("Start Listening", systemImage: "mic.fill")
+                }
+                .buttonStyle(.bordered)
+                .tint(.green)
+                .disabled(status == .speaking)
+
+                Button(action: {
+                    stopListening()
+                }) {
+                    Label("Stop Listening", systemImage: "stop.fill")
+                }
+                .buttonStyle(.bordered)
+                .tint(.red)
+                .disabled(status != .listening)
             }
-            .disabled(status == .speaking)
-            Button("Stop listening") {
-                stopListening()
-            }
-            .disabled(status != .listening)
+
             Text(recognizer.transcript)
                 .padding()
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, minHeight: 100)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
-//            Button("Lettuce") {
-//                status = .speaking
-//                speechHelper.speak("lettuce") {
-//                    status = .idle
-//                }
-//            }
-//            Button("Punch line") {
-//                status = .speaking
-//                speechHelper.speak("Lettuce in, we're freezing out here!") {
-//                    status = .idle
-//                }
-//            }
+                .font(.body.monospaced())
         }
+        .padding()
         .onAppear {
             askUserFor(.microphoneAccess)
         }
