@@ -13,7 +13,20 @@ struct ContentView: View {
 	}
 
 	var body: some View {
-		JokeView()
+        TabView {
+            Tab("Joke", systemImage: "speaker.wave.2.bubble.fill") {
+                JokeView()
+            }
+            Tab("Test 1", systemImage: "1.circle.fill") {
+                Text("Test 1")
+            }
+            Tab("Test 2", systemImage: "2.circle.fill") {
+                Text("Test 2")
+            }
+            Tab("Test 3", systemImage: "3.circle.fill") {
+                Text("Test 3")
+            }
+        }
 	}
 }
 
