@@ -28,13 +28,8 @@ final class Speaker: NSObject, AVSpeechSynthesizerDelegate {
         try? AVAudioSession.sharedInstance().setActive(true)
     }
 
-    func speak(_ text: String, locale: String = "en-US") {
+    func speak(_ text: String) {
         let utterance = AVSpeechUtterance(string: text)
-        utterance.voice = AVSpeechSynthesisVoice(language: locale) // e.g. "en-US", "fr-FR"
-        utterance.rate  = AVSpeechUtteranceDefaultSpeechRate       // 0.0 ... 1.0 (use the provided constants)
-        utterance.pitchMultiplier = 1.0                            // 0.5 ... 2.0
-        utterance.preUtteranceDelay = 0.0
-        utterance.postUtteranceDelay = 0.1
         synthesizer.speak(utterance)
     }
 
