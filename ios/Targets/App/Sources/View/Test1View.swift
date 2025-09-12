@@ -24,7 +24,7 @@ final class Speaker: NSObject, AVSpeechSynthesizerDelegate {
         super.init()
 
         synthesizer.delegate = self
-        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.duckOthers, .mixWithOthers])
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
     }
 
@@ -47,6 +47,7 @@ struct Test1View: View {
 
         var body: some View {
             VStack(spacing: 16) {
+                Text(".mixWithOthers")
         
                 Button("Speak with AVSpeechSynthesizer") {
                     speaker.speak("Hello! I can talk on my own using AVSpeechSynthesizer. This is an extremely long test so I can use VoiceOver at the same time and see what happens. Blah blah blah. Testing testing 1, 2, 3.")
@@ -54,9 +55,6 @@ struct Test1View: View {
                 Button("Stop AVSpeechSynthesizer") {
                     speaker.stop()
                 }
-//                Button("Speak Accessibility Announcement") {
-//                    UIAccessibility.post(notification: .announcement, argument: "Hello! This is an accessibility announcement.")
-//                }
             }
             .padding()
         }
