@@ -21,7 +21,7 @@ struct ContentView: View {
                 Test1View()
             }
             Tab("Test 2", systemImage: "2.circle.fill") {
-                Text("Test 2")
+                Test2View()
             }
             Tab("Test 3", systemImage: "3.circle.fill") {
                 Text("Test 3")
