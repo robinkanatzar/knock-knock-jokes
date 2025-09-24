@@ -14,18 +14,21 @@ struct ContentView: View {
 
 	var body: some View {
         TabView {
-            Tab("Joke", systemImage: "speaker.wave.2.bubble.fill") {
-                JokeView()
+            Tab("Self talk", systemImage: "0.circle.fill") {
+                SelfTalkView()
             }
+//            Tab("Joke", systemImage: "speaker.wave.2.bubble.fill") {
+//                JokeView()
+//            }
             Tab("Test 1", systemImage: "1.circle.fill") {
                 Test1View()
             }
-            Tab("Test 2", systemImage: "2.circle.fill") {
-                Test2View()
-            }
-            Tab("Test 3", systemImage: "3.circle.fill") {
-                Test3View()
-            }
+//            Tab("Test 2", systemImage: "2.circle.fill") {
+//                Test2View()
+//            }
+//            Tab("Test 3", systemImage: "3.circle.fill") {
+//                Test3View()
+//            }
         }
 	}
 }
