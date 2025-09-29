@@ -26,6 +26,16 @@ struct HomeView: View {
                 } label: {
                     Text("Example 3")
                 }
+                NavigationLink {
+                    Example4View()
+                } label: {
+                    Text("Example 4")
+                }
+                NavigationLink {
+                    Example5View()
+                } label: {
+                    Text("Example 5")
+                }
             }
         }
     }
