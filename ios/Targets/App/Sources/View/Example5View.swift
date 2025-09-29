@@ -1,14 +1,34 @@
 import SwiftUI
 import AVFoundation
+import Combine
 
 final class Example5Speaker {
     private let synthesizer = AVSpeechSynthesizer()
+    private var cancellables = Set<AnyCancellable>()
 
     init() {
         setupAudioSession()
+        observeVoiceOverStatus()
+        
+        if UIAccessibility.isVoiceOverRunning {
+            stop()
+        }
+    }
+
+    private func observeVoiceOverStatus() {
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                if UIAccessibility.isVoiceOverRunning {
+                    self.stop()
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func speak(_ text: String) {
+        guard !UIAccessibility.isVoiceOverRunning else { return }
         let utterance = AVSpeechUtterance(string: text)
         synthesizer.speak(utterance)
     }
@@ -16,7 +36,7 @@ final class Example5Speaker {
     func stop() {
         _ = synthesizer.stopSpeaking(at: .immediate)
     }
-    
+
     private func setupAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
@@ -32,7 +52,8 @@ struct Example5View: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Press the button and hear AVSpeechSynthesizer say \"utterance\" on repeat while you turn on VoiceOver on and off.")
-            Text("When VoiceOver is on, AVSpeechSynthesizer will stop.")
+            Text("When VoiceOver is on, AVSpeechSynthesizer will not speak.")
+            Text("When the user turns on VoiceOver while AVSpeechSynthesizer is speaking, AVSpeechSynthesizer will stop immediately.")
             Text("When VoiceOver is off, AVSpeechSynthesizer will speak.")
             Text("(Make sure your phone is not in silent mode.)")
             
@@ -52,11 +73,6 @@ struct Example5View: View {
         }
         .padding()
         .navigationTitle("Example 5: Is VoiceOver on?")
-        .onChange(of: isVoiceOverOn) {
-            if isVoiceOverOn {
-                speaker.stop()
-            }
-        }
     }
 }
 
