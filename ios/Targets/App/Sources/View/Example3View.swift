@@ -12,10 +12,15 @@ struct Example3View: View {
             Text("VoiceOver makes AVSpeechSynthesizer \"duck\" (get quieter).")
             Text("(Make sure your phone is not in silent mode.)")
             
-            Button("Play") {
-                synthesizer.speak(utterance)
+            HStack {
+                Button("Play") {
+                    synthesizer.speak(utterance)
+                }
+                .buttonStyle(.borderedProminent)
+                Spacer()
             }
-            .buttonStyle(.borderedProminent)
+            
+            Spacer()
         }
         .padding()
         .navigationTitle("Example 3: .duckOthers")

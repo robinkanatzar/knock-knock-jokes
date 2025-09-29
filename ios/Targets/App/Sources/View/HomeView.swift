@@ -14,7 +14,10 @@ struct HomeView: View {
                 NavigationLink {
                     Example1View()
                 } label: {
-                    Text("Example 1: Utterance")
+                    HStack {
+                        Text("Example 1: Utterance")
+                        Spacer()
+                    }
                 }
                 NavigationLink {
                     Example2View()
@@ -34,9 +37,13 @@ struct HomeView: View {
                 NavigationLink {
                     Example5View()
                 } label: {
-                    Text("Example 5")
+                    Text("Example 5: Is VoiceOver on?")
                 }
+                
+                Spacer()
             }
+            .padding()
+            .navigationTitle("When iOS Talks Back")
         }
     }
 }

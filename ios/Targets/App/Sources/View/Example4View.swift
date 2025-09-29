@@ -12,10 +12,15 @@ struct Example4View: View {
             Text("AVSpeechSynthesizer \"mixes\" politely or plays nicely with VoiceOver, letting its volume be turned down by VoiceOver.")
             Text("(Make sure your phone is not in silent mode.)")
             
-            Button("Play") {
-                synthesizer.speak(utterance)
+            HStack {
+                Button("Play") {
+                    synthesizer.speak(utterance)
+                }
+                .buttonStyle(.borderedProminent)
+                Spacer()
             }
-            .buttonStyle(.borderedProminent)
+            
+            Spacer()
         }
         .padding()
         .navigationTitle("Example 4: .mixWithOthers")
