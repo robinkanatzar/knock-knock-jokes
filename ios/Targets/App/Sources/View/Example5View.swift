@@ -2,19 +2,18 @@ import SwiftUI
 import AVFoundation
 import Combine
 
-final class Example5Speaker {
+final class Example5Speaker: ObservableObject {
     private let synthesizer = AVSpeechSynthesizer()
     private var cancellables = Set<AnyCancellable>()
-
+    
     init() {
         setupAudioSession()
         observeVoiceOverStatus()
-        
         if UIAccessibility.isVoiceOverRunning {
             stop()
         }
     }
-
+    
     private func observeVoiceOverStatus() {
         NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .receive(on: RunLoop.main)
@@ -26,17 +25,17 @@ final class Example5Speaker {
             }
             .store(in: &cancellables)
     }
-
+    
     func speak(_ text: String) {
         guard !UIAccessibility.isVoiceOverRunning else { return }
         let utterance = AVSpeechUtterance(string: text)
         synthesizer.speak(utterance)
     }
-
+    
     func stop() {
         _ = synthesizer.stopSpeaking(at: .immediate)
     }
-
+    
     private func setupAudioSession() {
         try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
@@ -44,11 +43,12 @@ final class Example5Speaker {
 }
 
 struct Example5View: View {
-    @Environment(\.accessibilityVoiceOverEnabled) var isVoiceOverOn
+    @Environment(\.accessibilityVoiceOverEnabled) private var isVoiceOverOn
+    @State private var showVoiceOverAlert = false
+    @StateObject private var speaker = Example5Speaker()
     
     let utterance = "utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance"
-    let speaker = Example5Speaker()
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Press the button and hear AVSpeechSynthesizer say \"utterance\" on repeat while you turn on VoiceOver on and off.")
@@ -59,7 +59,9 @@ struct Example5View: View {
             
             HStack {
                 Button("Play") {
-                    if !isVoiceOverOn {
+                    if isVoiceOverOn {
+                        showVoiceOverAlert = true
+                    } else {
                         speaker.speak(utterance)
                     }
                 }
@@ -73,6 +75,10 @@ struct Example5View: View {
         }
         .padding()
         .navigationTitle("Example 5: Is VoiceOver on?")
+        .alert("VoiceOver is on, so I will not start AVSpeechSynthesizer",
+               isPresented: $showVoiceOverAlert) {
+            Button("OK", role: .cancel) { }
+        }
     }
 }
 
