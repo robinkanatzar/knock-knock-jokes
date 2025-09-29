@@ -25,8 +25,7 @@ struct MainApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-//			ContentView()
-            HomeView()
+			ContentView()
 
 				// For different types of requests: Camera Request, Location Request, Request to Review the App, etc. See `askUserFor.swift` in SharedKit for more information.
 				.modifier(ShowRequestSheetWhenNeededModifier())

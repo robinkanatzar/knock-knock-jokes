@@ -1,13 +1,6 @@
-//
-//  HomeView.swift
-//  Joke
-//
-//  Created by Robin Kanatzar on 9/24/25.
-//
-
 import SwiftUI
 
-struct HomeView: View {
+struct ContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
