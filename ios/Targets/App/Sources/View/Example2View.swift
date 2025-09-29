@@ -1,14 +1,24 @@
-//
-//  Example2View.swift
-//  Joke
-//
-//  Created by Robin Kanatzar on 9/24/25.
-//
-
 import SwiftUI
+import AVFoundation
 
 struct Example2View: View {
+    let synthesizer = AVSpeechSynthesizer()
+    let utterance = AVSpeechUtterance(string: "Knock knock.")
+    
     var body: some View {
-        Text("Example 2")
+        VStack(spacing: 12) {
+            Text("Press the button and hear AVSpeechSynthesizer say \"Knock knock.\"")
+            Text("(Make sure your phone is not in silent mode.)")
+            
+            Button("Play") {
+                synthesizer.speak(utterance)
+            }
+        }
+        .padding()
+        .navigationTitle("Example 2")
     }
+}
+
+#Preview {
+    Example2View()
 }
