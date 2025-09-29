@@ -3,15 +3,15 @@ import AVFoundation
 
 struct Example6View: View {
     let synthesizer = AVSpeechSynthesizer()
-    let utterance = AVSpeechUtterance(string: "Hey this is your phone speaking.")
+    let utterance = AVSpeechUtterance(string: "Knock knock.")
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Press the button and hear AVSpeechSynthesizer say \"Hey this is your phone speaking.\"")
+            Text("Press the button and hear AVSpeechSynthesizer say \"Knock knock.\"")
             Text("(Make sure your phone is not in silent mode.)")
             
             HStack {
-                Button("Play") {
+                Button("Tell me a joke.") {
                     synthesizer.speak(utterance)
                 }
                 .buttonStyle(.borderedProminent)
