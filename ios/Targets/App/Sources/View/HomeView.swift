@@ -50,7 +50,14 @@ struct HomeView: View {
                     } label: {
                         Text("Example 7: Joke When VoiceOver Off")
                     }
+                    
                     Divider()
+                    
+                    NavigationLink {
+                        Example9View()
+                    } label: {
+                        Text("Example 9: Joke phone talks to itself")
+                    }
                     NavigationLink {
                         SelfTalkView()
                     } label: {
