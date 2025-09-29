@@ -39,6 +39,11 @@ struct HomeView: View {
                 } label: {
                     Text("Example 5: Is VoiceOver on?")
                 }
+                NavigationLink {
+                    Example6View()
+                } label: {
+                    Text("Example 6:")
+                }
                 
                 Spacer()
             }
