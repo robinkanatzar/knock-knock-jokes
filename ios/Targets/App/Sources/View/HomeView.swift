@@ -44,6 +44,11 @@ struct HomeView: View {
                 } label: {
                     Text("Example 6: Joke .mixWithOthers")
                 }
+                NavigationLink {
+                    Example7View()
+                } label: {
+                    Text("Example 7: Joke When VoiceOver Off")
+                }
                 
                 Spacer()
             }
