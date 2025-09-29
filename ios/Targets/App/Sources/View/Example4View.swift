@@ -8,7 +8,8 @@ struct Example4View: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Press the button and hear AVSpeechSynthesizer say \"utterance\" on repeat while you turn on VoiceOver and move the focus around.")
-            Text("AVAudioSession options is set to .duckOthers, so VoiceOver and AVSpeechSynthesizer will speak at the same volume if they are speaking at the same time.")
+            Text("AVAudioSession options is set to .mixWithOthers, so VoiceOver will be louder than AVSpeechSynthesizer if they are speaking at the same time.")
+            Text("AVSpeechSynthesizer \"mixes\" politely or plays nicely with VoiceOver, letting its volume be turned down by VoiceOver.")
             Text("(Make sure your phone is not in silent mode.)")
             
             Button("Play") {
@@ -17,14 +18,14 @@ struct Example4View: View {
             .buttonStyle(.borderedProminent)
         }
         .padding()
-        .navigationTitle("Example 4: .duckOthers")
+        .navigationTitle("Example 4: .mixWithOthers")
         .onAppear {
             setupAudioSession()
         }
     }
     
     private func setupAudioSession() {
-        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.duckOthers])
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.mixWithOthers])
         try? AVAudioSession.sharedInstance().setActive(true)
     }
 }

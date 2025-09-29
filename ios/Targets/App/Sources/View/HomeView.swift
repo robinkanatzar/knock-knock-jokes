@@ -24,12 +24,12 @@ struct HomeView: View {
                 NavigationLink {
                     Example3View()
                 } label: {
-                    Text("Example 3: .mixWithOthers")
+                    Text("Example 3: .duckOthers")
                 }
                 NavigationLink {
                     Example4View()
                 } label: {
-                    Text("Example 4: .duckOthers")
+                    Text("Example 4: .mixWithOthers")
                 }
                 NavigationLink {
                     Example5View()
