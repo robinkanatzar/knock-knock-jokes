@@ -42,7 +42,7 @@ struct HomeView: View {
                 NavigationLink {
                     Example6View()
                 } label: {
-                    Text("Example 6:")
+                    Text("Example 6: Joke .mixWithOthers")
                 }
                 
                 Spacer()
