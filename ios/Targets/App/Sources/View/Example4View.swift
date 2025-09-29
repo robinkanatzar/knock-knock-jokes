@@ -1,15 +1,31 @@
-//
-//  Example4View.swift
-//  Joke
-//
-//  Created by Robin Kanatzar on 9/29/25.
-//
-
 import SwiftUI
+import AVFoundation
 
 struct Example4View: View {
+    let synthesizer = AVSpeechSynthesizer()
+    let utterance = AVSpeechUtterance(string: "utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance, utterance")
+    
     var body: some View {
-        Text("Example 4")
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Press the button and hear AVSpeechSynthesizer say \"utterance\" on repeat while you turn on VoiceOver and move the focus around.")
+            Text("AVAudioSession options is set to .duckOthers, so VoiceOver and AVSpeechSynthesizer will speak at the same volume if they are speaking at the same time.")
+            Text("(Make sure your phone is not in silent mode.)")
+            
+            Button("Play") {
+                synthesizer.speak(utterance)
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .padding()
+        .navigationTitle("Example 4: .duckOthers")
+        .onAppear {
+            setupAudioSession()
+        }
+    }
+    
+    private func setupAudioSession() {
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: [.duckOthers])
+        try? AVAudioSession.sharedInstance().setActive(true)
     }
 }
 

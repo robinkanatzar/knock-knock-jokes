@@ -6,16 +6,17 @@ struct Example1View: View {
     let utterance = AVSpeechUtterance(string: "Hey this is your phone speaking.")
     
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text("Press the button and hear AVSpeechSynthesizer say \"Hey this is your phone speaking.\"")
             Text("(Make sure your phone is not in silent mode.)")
             
             Button("Play") {
                 synthesizer.speak(utterance)
             }
+            .buttonStyle(.borderedProminent)
         }
         .padding()
-        .navigationTitle("Example 1")
+        .navigationTitle("Example 1: Utterance")
     }
 }
 
