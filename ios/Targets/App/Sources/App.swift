@@ -9,7 +9,7 @@
 //  app via EnvironmentObject, and attach app-wide view modifiers.
 //
 
-import SharedKit
+//import SharedKit
 import SwiftUI
 import UIKit
 
@@ -28,7 +28,7 @@ struct MainApp: App {
 			ContentView()
 
 				// For different types of requests: Camera Request, Location Request, Request to Review the App, etc. See `askUserFor.swift` in SharedKit for more information.
-				.modifier(ShowRequestSheetWhenNeededModifier())
+//				.modifier(ShowRequestSheetWhenNeededModifier())
 
 				// Will show the WhatsNewView sheet if the user opens the app for the first time with a specific app version (for updates)
 //				.modifier(ShowFeatureSheetOnNewAppVersionModifier())
@@ -98,7 +98,7 @@ final class SceneDelegate: NSObject, ObservableObject, UIWindowSceneDelegate {
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 
 				// This modifier allows you to show in-app notifications with the `showInAppNotification` function
-				.modifier(ShowInAppNotificationsWhenCalledModifier())
+//				.modifier(ShowInAppNotificationsWhenCalledModifier())
 
 		)
 		secondaryViewController.view.backgroundColor = .clear
